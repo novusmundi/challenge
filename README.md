@@ -1,6 +1,6 @@
 # Build your first social network  
 
-The goal is to create [a feed like that of LensAI]() where you can explore images from the community. The most basic version of this will be to replicate the Community gallery of LensAI where you can explore posts in chronological order or using different filters. After completing the task, you will need to extend the functionality to be able to [view a user's profile](https://www.artofficialintelligence.xyz/user/w0xt3r.lens) and a [post page](https://www.artofficialintelligence.xyz/post/0xbedb-0xd7) with more information such as the description or comments.
+The goal is to create [a feed like that of LensAI](https://www.artofficialintelligence.xyz/gallery) where you can explore images from the community. The most basic version of this will be to replicate the Community gallery of LensAI where you can explore posts in chronological order or using different filters. After completing the task, you will need to extend the functionality to be able to [view a user's profile](https://www.artofficialintelligence.xyz/user/w0xt3r.lens) and a [post page](https://www.artofficialintelligence.xyz/post/0xbedb-0xd7) with more information such as the description or comments.
 
 What is Lens Protocol?
 
@@ -18,7 +18,7 @@ I have created queries for the rest of the necessary components so you should no
 
 # Construye tu primera red social  
 
-El objetivo es crear un feed como el de LensAI donde poder explorar las imágenes de la comunidad. La versión más básica de este será replicar la Community gallery de LensAI aquí puedes explorar los posts en orden cronológico o usando distintos filtros. 
+El objetivo es crear un [feed como el de LensAI](https://www.artofficialintelligence.xyz/gallery) donde poder explorar las imágenes de la comunidad. La versión más básica de este será replicar la Community gallery de LensAI aquí puedes explorar los posts en orden cronológico o usando distintos filtros. 
 Tras completar tarea deberéis extender las funcionalidades para poder [ver el perfil de un usuario](https://www.artofficialintelligence.xyz/user/w0xt3r.lens) y una [página de post](https://www.artofficialintelligence.xyz/post/0xbedb-0xd7) con más información como la descripción o los comentarios. 
 
 ¿Qué es lens protocol?
