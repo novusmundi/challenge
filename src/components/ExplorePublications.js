@@ -6,7 +6,7 @@ export default function ExplorePublications(props){
     const init = async () => {
         try{
             const request = {
-                sortCriteria: "LATEST",
+                sortCriteria: "LATEST", //You can filter by TOP_COMMENTED | TOP_COLLECTED | TOP_MIRRORED | LATEST
                 noRandomize:true,
                 sources:["5bba5781-78b5-4927-8d2f-122742817583"],
                 publicationTypes: ["POST"],

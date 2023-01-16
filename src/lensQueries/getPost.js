@@ -353,7 +353,7 @@ export function getPost(id){
         query: gql(GET_PUBLICATION),
         variables: {
           request: {
-            publicationId: id
+            publicationId: id // The ID of the post
 
           }
         },

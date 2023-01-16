@@ -278,10 +278,16 @@ fragment ReferenceModuleFields on ReferenceModule {
 
 
 /**
- * 
- * @param {
- * AA} request 
- * @returns 
+ *     REQUEST CONFIG EXAMPLE
+ *
+ * const request = {
+  sortCriteria: "LATEST",
+  noRandomize:true,
+  sources:["5bba5781-78b5-4927-8d2f-122742817583"], //The id of LensAI 
+  publicationTypes: ["POST"],
+  cursor:"{\"timestamp\":1,\"offset\":0}", 
+  limit:24
+}
  */
 export const explorePublications = (request) => {
   return new Promise(async (resolve, reject) => {

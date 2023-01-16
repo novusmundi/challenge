@@ -96,7 +96,7 @@ export const getUserProfile = async (handle) => {
             const result = await apolloClient.query({
                 query: gql(ProfileDocument),
                 variables: {
-                    request:{handle}, //The handle, @w0xter.lens REMEMBER TO INCLUDE ".lens" 
+                    request:{handle}, //The handle, @w0xter.lens. REMEMBER TO INCLUDE ".lens" 
                 },
               });
             
