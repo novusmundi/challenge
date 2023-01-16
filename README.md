@@ -12,7 +12,7 @@ Connection to Lens Protocol is done through its API, using GraphQL you can commu
 
 I have created a component called [ExplorePublications](https://github.com/novusmundi/challenge/blob/main/src/components/ExplorePublications.js) with which you can see an example of the configuration and the way to run the query, with this example you should be able to complete the rest of the code necessary to complete the feed view. Keep in mind that you need to create an infinite scroll using the query but modifying the cursor to be able to iterate over the data.
 
-I have created queries for the rest of the necessary components so you should not have any complexity when developing them. If you have any questions, you can join this Telegram chat to ask your questions.
+I have created queries for the rest of the necessary components so you should not have any complexity when developing them. If you have any questions, you can [join this Telegram chat](https://t.me/+cJeJKn-DbogyZmI0) to ask your questions.
 
 
 
@@ -32,7 +32,7 @@ La conexión a Lens Protocol se hace a través de su API, usando GraphQL te pued
 
 He creado un componente llamado [ExplorePublications](https://github.com/novusmundi/challenge/blob/main/src/components/ExplorePublications.js) con el que podeis ver un ejemplo de la configuración y la forma de ejecutar la query, con este ejemplo deberéis ser capaces de completar el resto del código necesario para completar la vista del feed. Tened en cuenta que hay que crear un infinite scroll usando la query pero modificando el cursor para poder iterar sobre los datos.   
  
-He creado queries para el resto de componentes necesarios por lo que no deberíais tener ninguna complejidad a la hora de desarrollarlos. Si tenéis alguna duda podéis uniros a este chat de telegram para hacer vuestras preguntas. 
+He creado queries para el resto de componentes necesarios por lo que no deberíais tener ninguna complejidad a la hora de desarrollarlos. Si tenéis alguna duda podéis uniros a [este chat de telegram](https://t.me/+cJeJKn-DbogyZmI0) para hacer vuestras preguntas. 
 
 
 
