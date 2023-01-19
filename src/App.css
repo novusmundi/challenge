@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.hover-img {
+  opacity: 1;
+}
+
+.hover-img:hover {
+  transition: 300ms;
+  opacity: 0.3;
+}
