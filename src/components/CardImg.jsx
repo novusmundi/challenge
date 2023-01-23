@@ -39,6 +39,9 @@ const CardImg = ({ data }) => {
         alt="imagen"
       />
       <div
+        onMouseOver={handleMouse}
+        onMouseOut={handleMouseOut}
+        onClick={() => handleSubmit(data?.id)}
         style={{
           display: hoverEvent ? "flex" : "none",
           position: hoverEvent ? "absolute" : "",
@@ -49,6 +52,7 @@ const CardImg = ({ data }) => {
           left: "50%",
           transform: "translate(-50%, -50%)",
           margin: 0,
+          cursor: "pointer",
         }}
       >
         <p style={{ color: "#47dd39" }}>@{data?.profile?.handle}</p>
