@@ -10,23 +10,33 @@ const UserProfile = () => {
   const isMobile = useMediaQuery({ query: "(min-width: 768px)" });
   const [infoUser, setInfoUser] = useState([]);
   const [infoPostUser, setInfoPostUser] = useState([]);
-  const [page, setPage] = useState();
+  const [lastPostUser, setLastPostUser] = useState([]);
+  const [page, setPage] = useState(null);
 
   let { iduser } = useParams();
+  console.log(infoPostUser?.data?.publications?.items);
+  // console.log(
+  //   lastPostUser
+  //     .concat(infoPostUser?.data?.publications?.items)
+  //     .map((data, index) => <CardImg data={data} />)
+  // );
 
-  const init = async () => {
-    try {
-      const response = await getUserProfile(iduser);
-      setInfoUser(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const response = await getUserProfile(iduser);
+        setInfoUser(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    init();
+  }, []);
 
   useEffect(() => {
     const initPost = async () => {
       try {
-        const response = await getUserPosts(infoUser?.id);
+        const response = await getUserPosts(infoUser?.id, page);
         setInfoPostUser(response);
       } catch (error) {
         console.log(error);
@@ -36,13 +46,12 @@ const UserProfile = () => {
     initPost();
   }, [infoUser, page]);
 
-  useEffect(() => {
-    init();
-  }, []);
-
-  const handleSubmit = () => {
-    setPage(infoPostUser?.data?.publications?.pageInfo?.prev);
-    console.log("as");
+  const loadMore = () => {
+    setPage(infoPostUser?.data?.publications?.pageInfo?.next);
+    setLastPostUser([
+      ...lastPostUser,
+      ...infoPostUser?.data?.publications?.items,
+    ]);
   };
 
   return (
@@ -83,10 +92,10 @@ const UserProfile = () => {
             src={urlContain(infoUser?.picture?.original?.url)}
             alt="foto perfil"
           />
-          <p>nombre de usuario: @{infoUser?.name}</p>
+          <p>@{infoUser?.name}</p>
           <div>
-            <p>seguidores: {infoUser?.stats?.totalFollowers}</p>
-            <p>seguidos: {infoUser?.stats?.totalFollowing}</p>
+            <p>Followers: {infoUser?.stats?.totalFollowers}</p>
+            <p>Following: {infoUser?.stats?.totalFollowing}</p>
           </div>
         </div>
         <div>
@@ -97,7 +106,7 @@ const UserProfile = () => {
               textAlign: isMobile ? "" : "center",
             }}
           >
-            Publicaciones
+            Publications
           </h3>
           <div
             style={{
@@ -106,22 +115,27 @@ const UserProfile = () => {
               justifyItems: "center",
               gridTemplateColumns: isMobile ? "1fr 1fr 1fr 1fr" : "1fr 1fr",
               gap: 10,
+              scrollBehavior: "smooth",
+              overflowY: "scroll",
+              height: 700,
             }}
           >
-            {infoPostUser?.data?.publications?.items.map((img, index) => (
-              <div key={index}>
-                <img
-                  alt="publicacion img"
-                  style={{
-                    width: isMobile ? 200 : 150,
-                    height: isMobile ? 200 : 150,
-                  }}
-                  src={`${img.metadata.media.map((url) =>
-                    urlContain(url.original.url)
-                  )}`}
-                />
-              </div>
-            ))}
+            {lastPostUser
+              ?.concat(infoPostUser?.data?.publications?.items)
+              .map((img, index) => (
+                <div key={index}>
+                  <img
+                    alt="publicacion img"
+                    style={{
+                      width: isMobile ? 200 : 150,
+                      height: isMobile ? 200 : 150,
+                    }}
+                    src={`${img?.metadata?.media?.map((url) =>
+                      urlContain(url?.original?.url)
+                    )}`}
+                  />
+                </div>
+              ))}
           </div>
           <button
             style={{
@@ -138,9 +152,9 @@ const UserProfile = () => {
               backgroundColor: "#1062dd",
               borderRadius: 5,
             }}
-            onClick={handleSubmit}
+            onClick={loadMore}
           >
-            Ver mas{" "}
+            Load More
           </button>
         </div>
       </div>

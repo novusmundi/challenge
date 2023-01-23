@@ -11,7 +11,7 @@ const ExplorePublications = (props) => {
   const [lastImg, setLastImg] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedButton, setSelectedButton] = useState("LATEST");
-
+  console.log(lastImg);
   useEffect(() => {
     const init = async () => {
       setLoading(true);

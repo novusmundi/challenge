@@ -10,20 +10,12 @@ const InfoPost = () => {
   const isMobile = useMediaQuery({ query: "(min-width: 768px)" });
   const [infoPost, setInfoPost] = useState([]);
   const [infoComments, setInfoComments] = useState([]);
+  const [lastComments, setLastComments] = useState([]);
   const [page, setPage] = useState(null);
 
   let { idpost } = useParams();
 
   const navigate = useNavigate();
-
-  const initPost = async () => {
-    try {
-      const response = await getPostComments(idpost, page);
-      setInfoComments(response.data?.publications);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
     const init = async () => {
@@ -36,11 +28,23 @@ const InfoPost = () => {
     };
 
     init();
+  }, []);
+
+  useEffect(() => {
+    const initPost = async () => {
+      try {
+        const response = await getPostComments(idpost, page);
+        setInfoComments(response.data?.publications);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     initPost();
   }, [page]);
 
-  const handleSubmit = () => {
+  const loadMore = () => {
     setPage(infoComments?.pageInfo?.next);
+    setLastComments([...lastComments, ...infoComments?.items]);
   };
 
   return (
@@ -146,24 +150,24 @@ const InfoPost = () => {
                 height: 350,
               }}
             >
-              {infoComments?.items?.map((data) => (
-                <ul key={data.id} style={{ padding: 0, listStyle: "none" }}>
+              {lastComments?.concat(infoComments?.items).map((data, index) => (
+                <ul key={index} style={{ padding: 0, listStyle: "none" }}>
                   <div
                     style={{ display: "flex", alignItems: "center", gap: 5 }}
                   >
                     <img
                       style={{ width: 30, height: 30, borderRadius: 40 }}
-                      src={urlContain(data.profile?.picture?.original?.url)}
+                      src={urlContain(data?.profile?.picture?.original?.url)}
                       alt="img profile user"
                     />
                     <p
-                      onClick={() => navigate(`/user/${data.profile.handle}`)}
+                      onClick={() => navigate(`/user/${data?.profile?.handle}`)}
                       style={{ color: "#f56f3a", cursor: "pointer" }}
                     >
-                      {data.profile.handle}
+                      {data?.profile?.handle}
                     </p>
                   </div>
-                  <li>{data.metadata.description}</li>
+                  <li>{data?.metadata?.description}</li>
                 </ul>
               ))}
               <button
@@ -181,7 +185,7 @@ const InfoPost = () => {
                   backgroundColor: "#1062dd",
                   borderRadius: 5,
                 }}
-                onClick={handleSubmit}
+                onClick={loadMore}
               >
                 More Comments
               </button>
