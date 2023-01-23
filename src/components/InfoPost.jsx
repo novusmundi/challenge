@@ -70,7 +70,7 @@ const InfoPost = () => {
           paddingTop: 60,
           paddingBottom: 60,
           justifyContent: "space-around",
-          backgroundColor: "wheat",
+          backgroundColor: "black",
           alignItems: isMobile ? "" : "center",
         }}
       >
@@ -79,7 +79,7 @@ const InfoPost = () => {
             style={{
               borderRadius: 10,
               marginLeft: 10,
-              maxHeight: isMobile ? 500 : 350,
+              maxHeight: isMobile ? "100%" : 350,
             }}
             alt="img-post"
             src={`${infoPost?.data?.publication.metadata?.media?.map((url) =>
@@ -89,21 +89,21 @@ const InfoPost = () => {
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
+              flexDirection: "row",
               width: "100%",
               justifyContent: "space-around",
             }}
           >
-            <p>
+            <p style={{ color: "white" }}>
               Total Amount Of Mirrors :{"    "}
               {infoPost?.data?.publication.stats?.totalAmountOfMirrors}
             </p>
-            <p>
+            <p style={{ color: "white" }}>
               Total Amount Of Collects:
               {"    "}
               {infoPost?.data?.publication.stats?.totalAmountOfCollects}
             </p>
-            <p>
+            <p style={{ color: "white" }}>
               Total Comment:
               {"    "}
               {infoPost?.data?.publication.stats?.totalAmountOfComments}
@@ -139,15 +139,26 @@ const InfoPost = () => {
                 @{infoPost?.data?.publication?.profile?.handle}
               </p>
             </div>
-            <p>{infoPost?.data?.publication?.metadata?.description}</p>
+            <p style={{ color: "white" }}>
+              {infoPost?.data?.publication?.metadata?.description}
+            </p>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <p>Comments</p>
+            <p
+              style={{
+                color: "#8e8f8f",
+                fontSize: 24,
+                fontWeight: "500",
+                marginBottom: 0,
+              }}
+            >
+              Comments
+            </p>
             <div
               style={{
                 scrollBehavior: "smooth",
                 overflowY: "scroll",
-                height: 350,
+                height: 500,
               }}
             >
               {lastComments?.concat(infoComments?.items).map((data, index) => (
@@ -167,7 +178,9 @@ const InfoPost = () => {
                       {data?.profile?.handle}
                     </p>
                   </div>
-                  <li>{data?.metadata?.description}</li>
+                  <li style={{ color: "white" }}>
+                    {data?.metadata?.description}
+                  </li>
                 </ul>
               ))}
               <button
@@ -189,7 +202,13 @@ const InfoPost = () => {
               >
                 More Comments
               </button>
-              <p style={{ borderTop: "1px solid black", textAlign: "center" }}>
+              <p
+                style={{
+                  borderTop: "1px solid white",
+                  textAlign: "center",
+                  color: "white",
+                }}
+              >
                 It is all, nothing more 🤐
               </p>
             </div>

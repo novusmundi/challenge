@@ -14,13 +14,8 @@ const UserProfile = () => {
   const [page, setPage] = useState(null);
 
   let { iduser } = useParams();
-  console.log(infoPostUser?.data?.publications?.items);
-  // console.log(
-  //   lastPostUser
-  //     .concat(infoPostUser?.data?.publications?.items)
-  //     .map((data, index) => <CardImg data={data} />)
-  // );
-
+  console.log(infoPostUser?.data?.publications);
+  console.log(lastPostUser);
   useEffect(() => {
     const init = async () => {
       try {
@@ -48,10 +43,13 @@ const UserProfile = () => {
 
   const loadMore = () => {
     setPage(infoPostUser?.data?.publications?.pageInfo?.next);
-    setLastPostUser([
-      ...lastPostUser,
-      ...infoPostUser?.data?.publications?.items,
-    ]);
+    let newItems = infoPostUser?.data?.publications?.items;
+    console.log(lastPostUser);
+    console.log(newItems);
+    newItems = newItems.filter(
+      (item) => !lastPostUser.some((i) => i.id === item.id)
+    );
+    setLastPostUser([...lastPostUser, ...newItems]);
   };
 
   return (
@@ -77,7 +75,7 @@ const UserProfile = () => {
           paddingTop: 60,
           paddingBottom: 60,
           justifyContent: "space-around",
-          backgroundColor: "wheat",
+          backgroundColor: "black",
         }}
       >
         <div
@@ -92,15 +90,20 @@ const UserProfile = () => {
             src={urlContain(infoUser?.picture?.original?.url)}
             alt="foto perfil"
           />
-          <p>@{infoUser?.name}</p>
+          <p style={{ color: "#f56f3a" }}>@{infoUser?.name}</p>
           <div>
-            <p>Followers: {infoUser?.stats?.totalFollowers}</p>
-            <p>Following: {infoUser?.stats?.totalFollowing}</p>
+            <p style={{ color: "white" }}>
+              Followers: {infoUser?.stats?.totalFollowers}
+            </p>
+            <p style={{ color: "white" }}>
+              Following: {infoUser?.stats?.totalFollowing}
+            </p>
           </div>
         </div>
         <div>
           <h3
             style={{
+              color: "white",
               margin: 0,
               marginBottom: 10,
               textAlign: isMobile ? "" : "center",

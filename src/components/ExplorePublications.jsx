@@ -11,7 +11,7 @@ const ExplorePublications = (props) => {
   const [lastImg, setLastImg] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedButton, setSelectedButton] = useState("LATEST");
-  console.log(lastImg);
+
   useEffect(() => {
     const init = async () => {
       setLoading(true);
@@ -67,11 +67,14 @@ const ExplorePublications = (props) => {
         >
           NomuLabs Challenge
         </h1>
+        <p style={{ color: "white", marginTop: 100, fontSize: 20 }}>Sort by:</p>
         <div
           style={{
             display: "flex",
-            justifyContent: "space-evenly",
-            marginBottom: 10,
+            justifyContent: "start",
+            gap: 20,
+            marginTop: 20,
+            marginBottom: 40,
           }}
         >
           <button
@@ -97,13 +100,13 @@ const ExplorePublications = (props) => {
               fontSize: 16,
               cursor: "pointer",
               backgroundColor:
-                selectedButton === "TOP_COMMENTED" ? "grey" : "#123353",
+                selectedButton === "TOP_COLLECTED" ? "grey" : "#123353",
             }}
             onClick={() => {
-              handleClick("TOP_COMMENTED");
+              handleClick("TOP_COLLECTED");
             }}
           >
-            Most mirrored
+            Most collected
           </button>
           <button
             style={{
@@ -113,13 +116,13 @@ const ExplorePublications = (props) => {
               fontSize: 16,
               cursor: "pointer",
               backgroundColor:
-                selectedButton === "TOP_COLLECTED" ? "grey" : "#123353",
+                selectedButton === "TOP_MIRRORED" ? "grey" : "#123353",
             }}
             onClick={() => {
-              handleClick("TOP_COLLECTED");
+              handleClick("TOP_MIRRORED");
             }}
           >
-            Most collected
+            Most mirrored
           </button>
         </div>
 
@@ -139,8 +142,7 @@ const ExplorePublications = (props) => {
         ) : (
           <div
             style={{
-              backgroundColor: "wheat",
-              padding: 15,
+              backgroundColor: "#0b130f",
               paddingTop: 30,
               display: "grid",
               justifyItems: "center",

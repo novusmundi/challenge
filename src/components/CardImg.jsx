@@ -29,7 +29,7 @@ const CardImg = ({ data }) => {
         className="hover-img"
         style={{
           width: "100%",
-          height: 300,
+          height: "100%",
           borderRadius: 10,
           cursor: "pointer",
         }}
