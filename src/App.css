@@ -43,5 +43,5 @@
 
 .hover-img:hover {
   transition: 300ms;
-  opacity: 0.3;
+  filter: brightness(30%);
 }
