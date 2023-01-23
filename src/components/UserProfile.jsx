@@ -12,10 +12,9 @@ const UserProfile = () => {
   const [infoPostUser, setInfoPostUser] = useState([]);
   const [lastPostUser, setLastPostUser] = useState([]);
   const [page, setPage] = useState(null);
-
+  console.log(infoPostUser?.data?.publications?.items?.length <= 0);
   let { iduser } = useParams();
-  console.log(infoPostUser?.data?.publications);
-  console.log(lastPostUser);
+
   useEffect(() => {
     const init = async () => {
       try {
@@ -111,6 +110,9 @@ const UserProfile = () => {
           >
             Publications
           </h3>
+          {infoPostUser?.data?.publications?.items?.length <= 0 && (
+            <p style={{ color: "white", fontSize: 26 }}>No data!</p>
+          )}
           <div
             style={{
               paddingTop: 30,

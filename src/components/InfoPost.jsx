@@ -14,7 +14,6 @@ const InfoPost = () => {
   const [page, setPage] = useState(null);
 
   let { idpost } = useParams();
-
   const navigate = useNavigate();
 
   useEffect(() => {
