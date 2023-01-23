@@ -1,37 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { getPost } from "../lensQueries/getPost";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { getPostComments } from "../lensQueries/getPostComments";
 import { urlContain } from "../utils/UrlContain";
+import { useMediaQuery } from "react-responsive";
 
 const InfoPost = () => {
+  const isMobile = useMediaQuery({ query: "(min-width: 768px)" });
   const [infoPost, setInfoPost] = useState([]);
   const [infoComments, setInfoComments] = useState([]);
+  const [page, setPage] = useState(null);
 
   let { idpost } = useParams();
-  const navigate = useNavigate();
 
-  const init = async () => {
-    try {
-      const response = await getPost(idpost);
-      setInfoPost(response);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const navigate = useNavigate();
 
   const initPost = async () => {
     try {
-      const response = await getPostComments(idpost);
+      const response = await getPostComments(idpost, page);
       setInfoComments(response.data?.publications);
     } catch (error) {
       console.log(error);
     }
   };
 
-  init();
-  initPost();
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const response = await getPost(idpost);
+        setInfoPost(response);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    init();
+    initPost();
+  }, [page]);
+
+  const handleSubmit = () => {
+    setPage(infoComments?.pageInfo?.next);
+  };
 
   return (
     <div style={{ backgroundColor: "black", height: "100vh" }}>
@@ -49,18 +59,24 @@ const InfoPost = () => {
       <div
         style={{
           display: "flex",
+          flexDirection: isMobile ? "row" : "column",
           gap: 20,
-          marginLeft: 240,
-          marginRight: 240,
+          marginLeft: isMobile ? 240 : 0,
+          marginRight: isMobile ? 240 : 0,
           paddingTop: 60,
           paddingBottom: 60,
           justifyContent: "space-around",
           backgroundColor: "wheat",
+          alignItems: isMobile ? "" : "center",
         }}
       >
         <div>
           <img
-            style={{ borderRadius: 10, marginLeft: 10, maxHeight: 500 }}
+            style={{
+              borderRadius: 10,
+              marginLeft: 10,
+              maxHeight: isMobile ? 500 : 350,
+            }}
             alt="img-post"
             src={`${infoPost?.data?.publication.metadata?.media?.map((url) =>
               urlContain(url.original.url)
@@ -90,7 +106,7 @@ const InfoPost = () => {
             </p>
           </div>
         </div>
-        <div style={{ paddingRight: 10 }}>
+        <div style={{ paddingRight: 10, paddingLeft: isMobile ? 0 : 20 }}>
           <div
             style={{
               display: "flex",
@@ -141,22 +157,34 @@ const InfoPost = () => {
                       alt="img profile user"
                     />
                     <p
-                      onClick={() =>
-                        navigate(
-                          `/user/${data.metadata.name.replace(
-                            "Comment by @",
-                            ""
-                          )}`
-                        )
-                      }
+                      onClick={() => navigate(`/user/${data.profile.handle}`)}
                       style={{ color: "#f56f3a", cursor: "pointer" }}
                     >
-                      {data.metadata.name.replace("Comment by ", "")}
+                      {data.profile.handle}
                     </p>
                   </div>
                   <li>{data.metadata.description}</li>
                 </ul>
               ))}
+              <button
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  margin: "0 auto",
+                  marginTop: 20,
+                  padding: 10,
+                  width: isMobile ? 400 : 200,
+                  textAlign: "center",
+                  background: "none",
+                  cursor: "pointer",
+                  color: "white",
+                  backgroundColor: "#1062dd",
+                  borderRadius: 5,
+                }}
+                onClick={handleSubmit}
+              >
+                More Comments
+              </button>
               <p style={{ borderTop: "1px solid black", textAlign: "center" }}>
                 It is all, nothing more 🤐
               </p>

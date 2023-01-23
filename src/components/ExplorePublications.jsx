@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { explorePublications } from "../lensQueries/explorePublications";
 import CardImg from "./CardImg";
+import { useMediaQuery } from "react-responsive";
 
-export default function ExplorePublications(props) {
+const ExplorePublications = (props) => {
+  const isMobile = useMediaQuery({ query: "(min-width: 768px)" });
+
   const [page, setPage] = useState('{"timestamp":1,"offset":0}');
   const [data, setData] = useState([]);
   const [lastImg, setLastImg] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedButton, setSelectedButton] = useState("LATEST");
-  console.log(lastImg);
+
   useEffect(() => {
     const init = async () => {
       setLoading(true);
@@ -48,7 +51,12 @@ export default function ExplorePublications(props) {
     <div
       style={{ backgroundColor: "black", height: "100%", paddingBottom: 30 }}
     >
-      <div style={{ marginLeft: 200, marginRight: 200 }}>
+      <div
+        style={{
+          marginLeft: isMobile ? 200 : 10,
+          marginRight: isMobile ? 200 : 10,
+        }}
+      >
         <h1
           style={{
             textAlign: "center",
@@ -115,8 +123,16 @@ export default function ExplorePublications(props) {
           </button>
         </div>
 
-        {!data && <p style={{ fontSize: 50, color: "white" }}>Loading...</p>}
-        {loading && <p style={{ fontSize: 50, color: "white" }}>Loading...</p>}
+        {!data && (
+          <p style={{ fontSize: 50, color: "white", textAlign: "center" }}>
+            Loading...
+          </p>
+        )}
+        {loading && (
+          <p style={{ fontSize: 50, color: "white", textAlign: "center" }}>
+            Loading...
+          </p>
+        )}
 
         {data === null ? (
           "Esta cargando ..."
@@ -128,7 +144,7 @@ export default function ExplorePublications(props) {
               paddingTop: 30,
               display: "grid",
               justifyItems: "center",
-              gridTemplateColumns: "1fr 1fr 1fr 1fr",
+              gridTemplateColumns: isMobile ? "1fr 1fr 1fr 1fr" : "1fr 1fr 1fr",
               gap: 10,
             }}
           >
@@ -147,7 +163,7 @@ export default function ExplorePublications(props) {
           margin: "0 auto",
           marginTop: 20,
           padding: 10,
-          width: 400,
+          width: isMobile ? 400 : 200,
           textAlign: "center",
           background: "none",
           cursor: "pointer",
@@ -161,4 +177,6 @@ export default function ExplorePublications(props) {
       </button>
     </div>
   );
-}
+};
+
+export default ExplorePublications;
