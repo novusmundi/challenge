@@ -89,7 +89,8 @@ const UserProfile = () => {
             src={urlContain(infoUser?.picture?.original?.url)}
             alt="foto perfil"
           />
-          <p style={{ color: "#f56f3a" }}>@{infoUser?.name}</p>
+          {console.log(infoUser)}
+          <p style={{ color: "#f56f3a" }}>@{infoUser?.handle}</p>
           <div>
             <p style={{ color: "white" }}>
               Followers: {infoUser?.stats?.totalFollowers}
@@ -162,6 +163,20 @@ const UserProfile = () => {
             Load More
           </button>
         </div>
+      </div>
+      <div
+        style={{
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+          backgroundColor: "black",
+          zIndex: 1,
+          borderTop: "1px solid grey",
+        }}
+      >
+        <p style={{ color: "white", textAlign: "center" }}>
+          Diseñada por Francisco Rey
+        </p>
       </div>
     </div>
   );

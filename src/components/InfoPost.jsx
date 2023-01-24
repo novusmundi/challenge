@@ -12,7 +12,7 @@ const InfoPost = () => {
   const [infoComments, setInfoComments] = useState([]);
   const [lastComments, setLastComments] = useState([]);
   const [page, setPage] = useState(null);
-
+  console.log(infoComments?.items?.length <= 0);
   let { idpost } = useParams();
   const navigate = useNavigate();
 
@@ -160,6 +160,13 @@ const InfoPost = () => {
                 height: 500,
               }}
             >
+              {infoComments?.items?.length <= 0 && (
+                <p
+                  style={{ color: "white", fontSize: 26, textAlign: "center" }}
+                >
+                  No comments!
+                </p>
+              )}
               {lastComments?.concat(infoComments?.items).map((data, index) => (
                 <ul key={index} style={{ padding: 0, listStyle: "none" }}>
                   <div
@@ -213,6 +220,20 @@ const InfoPost = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div
+        style={{
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+          backgroundColor: "black",
+          zIndex: 1,
+          borderTop: "1px solid grey",
+        }}
+      >
+        <p style={{ color: "white", textAlign: "center" }}>
+          Diseñada por Francisco Rey
+        </p>
       </div>
     </div>
   );

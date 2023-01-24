@@ -172,11 +172,37 @@ const ExplorePublications = (props) => {
           color: "white",
           backgroundColor: "#1062dd",
           borderRadius: 5,
+          marginBottom: 40,
         }}
         onClick={loadMore}
       >
         Load more
       </button>
+      <div
+        style={{
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+          backgroundColor: "black",
+          zIndex: 1,
+          borderTop: "1px solid grey",
+        }}
+      >
+        <p style={{ color: "white", textAlign: "center" }}>
+          Diseñada por Francisco Rey |
+          <a
+            style={{
+              textDecoration: "none",
+              color: "white",
+              cursor: "pointer",
+              marginLeft: 5,
+            }}
+            href="https://www.linkedin.com/in/francisco-rey-71060419a/"
+          >
+            LinkedIn
+          </a>
+        </p>
+      </div>
     </div>
   );
 };
