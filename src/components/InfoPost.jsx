@@ -1,50 +1,12 @@
-import React, { useEffect } from "react";
-import { getPost } from "../lensQueries/getPost";
-import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
-import { getPostComments } from "../lensQueries/getPostComments";
 import { urlContain } from "../utils/UrlContain";
 import { useMediaQuery } from "react-responsive";
+import useInfoPost from "../hooks/useInfoPost";
 
 const InfoPost = () => {
   const isMobile = useMediaQuery({ query: "(min-width: 768px)" });
-  const [infoPost, setInfoPost] = useState([]);
-  const [infoComments, setInfoComments] = useState([]);
-  const [lastComments, setLastComments] = useState([]);
-  const [page, setPage] = useState(null);
-  console.log(infoComments?.items?.length <= 0);
-  let { idpost } = useParams();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    const init = async () => {
-      try {
-        const response = await getPost(idpost);
-        setInfoPost(response);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    init();
-  }, []);
-
-  useEffect(() => {
-    const initPost = async () => {
-      try {
-        const response = await getPostComments(idpost, page);
-        setInfoComments(response.data?.publications);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    initPost();
-  }, [page]);
-
-  const loadMore = () => {
-    setPage(infoComments?.pageInfo?.next);
-    setLastComments([...lastComments, ...infoComments?.items]);
-  };
+  const { infoPost, infoComments, lastComments, navigate, loadMore } =
+    useInfoPost();
 
   return (
     <div style={{ backgroundColor: "black", height: "100vh" }}>
