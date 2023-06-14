@@ -9,6 +9,7 @@ const Router = () => {
   return (
     <Routes>
       <Route index element={<ExplorePublications />} />
+      <Route path="/" element={<ExplorePublications />} />
       <Route path="/post/:idpost" element={<InfoPost />} />
       <Route path="/user/:iduser" element={<UserProfile />} />
     </Routes>

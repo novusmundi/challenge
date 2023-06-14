@@ -1,10 +1,11 @@
 import { urlContain } from "../utils/UrlContain";
 import { useMediaQuery } from "react-responsive";
 import useProfile from "../hooks/useProfile";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
   const isMobile = useMediaQuery({ query: "(min-width: 768px)" });
-
+  const navigate = useNavigate();
   const { infoUser, infoPostUser, lastPostUser, loadMore } = useProfile();
 
   return (
@@ -16,9 +17,11 @@ const UserProfile = () => {
           paddingTop: 20,
           paddingBottom: 20,
           textAlign: "center",
+          cursor: "pointer",
         }}
+        onClick={() => navigate("/")}
       >
-        Nomu Challenge
+        NomuLabs Challenge
       </h1>
       <div
         style={{

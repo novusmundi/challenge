@@ -12,19 +12,11 @@ const CardImg = ({ data }) => {
     navigate(`/post/${id}`);
   };
 
-  const handleMouse = () => {
-    setHoverEvent(true);
-  };
-
-  const handleMouseOut = () => {
-    setHoverEvent(false);
-  };
-
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
       <img
-        onMouseOver={handleMouse}
-        onMouseOut={handleMouseOut}
+        onMouseOver={() => setHoverEvent(true)}
+        onMouseOut={() => setHoverEvent(false)}
         onClick={() => handleSubmit(data?.id)}
         className="hover-img"
         style={{
@@ -36,11 +28,11 @@ const CardImg = ({ data }) => {
         src={`${data?.metadata?.media?.map((url) =>
           urlContain(url?.original?.url)
         )}`}
-        alt="imagen"
+        alt={`Imagen extraida de la data`}
       />
       <div
-        onMouseOver={handleMouse}
-        onMouseOut={handleMouseOut}
+        onMouseOver={() => setHoverEvent(true)}
+        onMouseOut={() => setHoverEvent(false)}
         onClick={() => handleSubmit(data?.id)}
         style={{
           display: hoverEvent ? "flex" : "none",

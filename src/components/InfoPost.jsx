@@ -17,9 +17,11 @@ const InfoPost = () => {
           textAlign: "center",
           paddingTop: 20,
           paddingBottom: 20,
+          cursor: "pointer",
         }}
+        onClick={() => navigate("/")}
       >
-        Challenge Nomu
+        NomuLabs Challenge
       </h1>
       <div
         style={{

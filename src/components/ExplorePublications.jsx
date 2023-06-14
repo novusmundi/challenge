@@ -1,10 +1,11 @@
 import CardImg from "./CardImg";
 import { useMediaQuery } from "react-responsive";
 import useExplorePublications from "../hooks/useExplorePublications";
+import { useNavigate } from "react-router-dom";
 
 const ExplorePublications = (props) => {
   const isMobile = useMediaQuery({ query: "(min-width: 768px)" });
-
+  const navigate = useNavigate();
   const { data, lastImg, loading, selectedButton, handleClick, loadMore } =
     useExplorePublications();
 
@@ -24,7 +25,9 @@ const ExplorePublications = (props) => {
             marginTop: 0,
             paddingTop: 30,
             color: "white",
+            cursor: "pointer",
           }}
+          onClick={() => navigate("/")}
         >
           NomuLabs Challenge
         </h1>
